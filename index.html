@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>الشيف أحمد - تورتات وكيك مصنوع خصيصًا لكل مناسبة</title>
+    <meta
+      name="description"
+      content="الشيف أحمد لصناعة التورتات والكيك المخصص لأعياد الميلاد والمناسبات. اطلب الآن عبر الواتساب واستمتع بأشهى الأذواق."
+    />
+    <meta name="author" content="الشيف أحمد" />
+    <meta property="og:title" content="الشيف أحمد - تورتات وكيك مخصص" />
+    <meta
+      property="og:description"
+      content="تورتات وكيك مصنوع خصيصًا لكل مناسبة. اطلب الآن عبر الواتساب."
+    />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;500;600;700;800&display=swap"
+    />
+
+    <!-- Tailwind CSS (CDN, no build step) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="tailwind-config.js"></script>
+
+    <!-- Lucide Icons (CDN) -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body class="min-h-screen bg-background text-foreground">
+    <!-- Navbar -->
+    <header
+      id="navbar"
+      class="fixed inset-x-0 top-0 z-40 transition-all duration-300 bg-background/60 backdrop-blur-sm"
+    >
+      <nav
+        class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8"
+      >
+        <a href="#home" class="nav-link flex items-center gap-2 shrink-0">
+          <span
+            class="grid h-10 w-10 place-items-center rounded-full bg-gradient-primary text-primary-foreground shadow-soft"
+          >
+            <i data-lucide="cake" class="h-5 w-5"></i>
+          </span>
+          <span class="text-lg font-bold tracking-tight sm:text-xl">
+            الشيف <span class="text-gradient-gold">أحمد</span>
+          </span>
+        </a>
+
+        <ul class="hidden items-center gap-1 lg:flex">
+          <li>
+            <a
+              href="#home"
+              class="nav-link rounded-full px-4 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-secondary hover:text-primary"
+              >الرئيسية</a
+            >
+          </li>
+          <li>
+            <a
+              href="#menu"
+              class="nav-link rounded-full px-4 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-secondary hover:text-primary"
+              >قائمة التورتات</a
+            >
+          </li>
+          <li>
+            <a
+              href="#pricing"
+              class="nav-link rounded-full px-4 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-secondary hover:text-primary"
+              >الأسعار</a
+            >
+          </li>
+          <li>
+            <a
+              href="#why"
+              class="nav-link rounded-full px-4 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-secondary hover:text-primary"
+              >من نحن</a
+            >
+          </li>
+          <li>
+            <a
+              href="#gallery"
+              class="nav-link rounded-full px-4 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-secondary hover:text-primary"
+              >المعرض</a
+            >
+          </li>
+          <li>
+            <a
+              href="#reviews"
+              class="nav-link rounded-full px-4 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-secondary hover:text-primary"
+              >آراء العملاء</a
+            >
+          </li>
+        </ul>
+
+        <div class="flex items-center gap-2">
+          <a
+            href="https://wa.me/201111539089"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hidden items-center gap-2 rounded-full bg-whatsapp px-4 py-2 text-sm font-semibold text-white shadow-soft transition-all hover:scale-105 hover:brightness-110 sm:inline-flex"
+          >
+            <i data-lucide="phone" class="h-4 w-4"></i>
+            اطلب الآن
+          </a>
+          <button
+            type="button"
+            id="menu-toggle"
+            class="grid h-10 w-10 place-items-center rounded-full border border-border bg-card text-foreground transition-colors hover:bg-secondary lg:hidden"
+            aria-label="فتح القائمة"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+          >
+            <i data-lucide="menu" class="h-5 w-5" id="menu-icon-open"></i>
+            <i data-lucide="x" class="h-5 w-5 hidden" id="menu-icon-close"></i>
+          </button>
+        </div>
+      </nav>
+
+      <!-- Mobile drawer -->
+      <div
+        id="mobile-menu"
+        class="lg:hidden overflow-hidden border-t border-border bg-background/95 backdrop-blur-md transition-[max-height,opacity] duration-300 ease-out max-h-0 opacity-0"
+      >
+        <ul class="flex flex-col gap-1 px-4 py-4">
+          <li>
+            <a
+              href="#home"
+              class="nav-link block rounded-xl px-4 py-3 text-base font-medium text-foreground/90 transition-colors hover:bg-secondary hover:text-primary"
+              >الرئيسية</a
+            >
+          </li>
+          <li>
+            <a
+              href="#menu"
+              class="nav-link block rounded-xl px-4 py-3 text-base font-medium text-foreground/90 transition-colors hover:bg-secondary hover:text-primary"
+              >قائمة التورتات</a
+            >
+          </li>
+          <li>
+            <a
+              href="#pricing"
+              class="nav-link block rounded-xl px-4 py-3 text-base font-medium text-foreground/90 transition-colors hover:bg-secondary hover:text-primary"
+              >الأسعار</a
+            >
+          </li>
+          <li>
+            <a
+              href="#why"
+              class="nav-link block rounded-xl px-4 py-3 text-base font-medium text-foreground/90 transition-colors hover:bg-secondary hover:text-primary"
+              >من نحن</a
+            >
+          </li>
+          <li>
+            <a
+              href="#gallery"
+              class="nav-link block rounded-xl px-4 py-3 text-base font-medium text-foreground/90 transition-colors hover:bg-secondary hover:text-primary"
+              >المعرض</a
+            >
+          </li>
+          <li>
+            <a
+              href="#reviews"
+              class="nav-link block rounded-xl px-4 py-3 text-base font-medium text-foreground/90 transition-colors hover:bg-secondary hover:text-primary"
+              >آراء العملاء</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://wa.me/201111539089"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="mt-2 flex items-center justify-center gap-2 rounded-xl bg-whatsapp px-4 py-3 text-base font-semibold text-white"
+            >
+              <i data-lucide="phone" class="h-4 w-4"></i>
+              تواصل واتساب
+            </a>
+          </li>
+        </ul>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero -->
+      <section
+        id="home"
+        class="relative overflow-hidden bg-gradient-warm pt-28 pb-16 sm:pt-32 sm:pb-24"
+      >
+        <div
+          class="pointer-events-none absolute -top-24 -left-24 h-96 w-96 rounded-full bg-primary/10 blur-3xl"
+        ></div>
+        <div
+          class="pointer-events-none absolute -bottom-24 -right-24 h-96 w-96 rounded-full bg-gold/20 blur-3xl"
+        ></div>
+
+        <div
+          class="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8"
+        >
+          <div class="text-center lg:text-start">
+            <span
+              class="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-card/60 px-4 py-1.5 text-xs font-semibold text-primary shadow-soft backdrop-blur"
+            >
+              <i data-lucide="sparkles" class="h-3.5 w-3.5 text-gold"></i>
+              تورتات مصنوعة يدويًا بحب
+            </span>
+            <h1
+              class="mt-6 text-4xl leading-tight font-bold sm:text-5xl lg:text-6xl"
+            >
+              تورتة مميزة لكل
+              <br />
+              <span class="text-gradient-gold">مناسبة تستحقها</span>
+            </h1>
+            <p
+              class="mx-auto mt-5 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg lg:mx-0"
+            >
+              الشيف أحمد يصمم لك تورتة مخصصة بالكامل — من عيد الميلاد، للخطوبة،
+              للأفراح والمناسبات الخاصة. مذاق فاخر، تصميم راقٍ، وتسليم في موعده.
+            </p>
+            <div
+              class="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center lg:justify-start"
+            >
+              <a
+                id="hero-whatsapp-link"
+                href="https://wa.me/201111539089"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-whatsapp px-8 py-4 text-base font-semibold text-white shadow-elegant transition-all hover:scale-105 hover:brightness-110 sm:w-auto"
+              >
+                <i data-lucide="phone" class="h-5 w-5"></i>
+                اطلب تورتتك عبر واتساب
+              </a>
+              <a
+                href="#menu"
+                class="nav-link inline-flex w-full items-center justify-center gap-2 rounded-full border-2 border-primary/20 bg-card px-8 py-4 text-base font-semibold text-primary transition-all hover:border-primary hover:bg-secondary sm:w-auto"
+              >
+                استعرض القائمة
+              </a>
+            </div>
+
+            <div
+              class="mt-10 flex items-center justify-center gap-6 text-sm text-muted-foreground lg:justify-start"
+            >
+              <div class="flex items-center gap-1.5">
+                <div class="flex text-gold" id="hero-stars"></div>
+                <span class="font-semibold">4.9</span>
+              </div>
+              <div class="h-4 w-px bg-border"></div>
+              <span>+500 عميل سعيد</span>
+            </div>
+          </div>
+
+          <div class="relative mx-auto w-full max-w-lg lg:max-w-none">
+            <div
+              class="absolute inset-0 -rotate-6 rounded-[2.5rem] bg-gradient-primary opacity-20 blur-2xl"
+            ></div>
+            <img
+              src="assets/hero-cake.jpg"
+              alt="تورتة فاخرة من تصميم الشيف أحمد"
+              width="1600"
+              height="1200"
+              class="relative aspect-square w-full rounded-[2rem] object-cover shadow-elegant sm:aspect-[4/5]"
+            />
+            <div
+              class="absolute -bottom-4 -start-4 hidden items-center gap-3 rounded-2xl bg-card px-4 py-3 shadow-elegant sm:flex"
+            >
+              <div
+                class="grid h-10 w-10 place-items-center rounded-xl bg-gold/20 text-gold-foreground"
+              >
+                <i data-lucide="award" class="h-5 w-5"></i>
+              </div>
+              <div class="text-start">
+                <p class="text-xs text-muted-foreground">جودة معتمدة</p>
+                <p class="text-sm font-bold">مكونات طبيعية 100%</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Menu -->
+      <section id="menu" class="py-16 sm:py-24">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="text-center">
+            <span
+              class="text-sm font-semibold uppercase tracking-widest text-gold-foreground"
+              >قائمتنا</span
+            >
+            <h2 class="mt-2 text-3xl font-bold sm:text-4xl lg:text-5xl">
+              الأكثر طلبًا من <span class="text-gradient-gold">تورتاتنا</span>
+            </h2>
+            <p class="mx-auto mt-4 max-w-2xl text-base text-muted-foreground">
+              اختر من مجموعتنا المميزة، أو تواصل معنا لتصميم تورتة خاصة بك
+              بالكامل.
+            </p>
+          </div>
+
+          <div
+            id="menu-grid"
+            class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          ></div>
+        </div>
+      </section>
+
+      <!-- Pricing -->
+      <section id="pricing" class="bg-gradient-warm py-16 sm:py-24">
+        <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          <div class="text-center">
+            <span
+              class="text-sm font-semibold uppercase tracking-widest text-gold-foreground"
+              >الأسعار</span
+            >
+            <h2 class="mt-2 text-3xl font-bold sm:text-4xl lg:text-5xl">
+              أسعار التورتات <span class="text-gradient-gold">حسب الحجم</span>
+            </h2>
+            <p class="mx-auto mt-4 max-w-2xl text-base text-muted-foreground">
+              السعر يختلف حسب حجم التورتة اللي تختارها. تواصل معنا عبر الواتساب
+              وهنساعدك تحدد المقاس المناسب لعدد ضيوفك.
+            </p>
+          </div>
+
+          <div class="mt-10 overflow-hidden rounded-3xl bg-card shadow-soft">
+            <table class="price-table w-full text-sm sm:text-base">
+              <thead>
+                <tr class="bg-secondary text-secondary-foreground">
+                  <th scope="col" class="text-right">المقاس</th>
+                  <th scope="col" class="text-left">السعر</th>
+                </tr>
+              </thead>
+              <tbody id="pricing-body"></tbody>
+            </table>
+          </div>
+
+          <p class="mt-6 text-center text-sm text-muted-foreground">
+            * الأسعار تقريبية وقابلة للتغيير حسب التصميم والإضافات المطلوبة.
+          </p>
+
+          <div class="mt-8 text-center">
+            <a
+              href="https://wa.me/201111539089"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center gap-2 rounded-full bg-whatsapp px-8 py-3.5 text-base font-semibold text-white shadow-soft transition-all hover:scale-105 hover:brightness-110"
+            >
+              <i data-lucide="phone" class="h-5 w-5"></i>
+              اسأل عن المقاس المناسب
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Why Us -->
+      <section id="why" class="py-16 sm:py-24">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="text-center">
+            <span
+              class="text-sm font-semibold uppercase tracking-widest text-gold-foreground"
+              >لماذا نحن</span
+            >
+            <h2 class="mt-2 text-3xl font-bold sm:text-4xl lg:text-5xl">
+              سر تميّز <span class="text-gradient-gold">الشيف أحمد</span>
+            </h2>
+          </div>
+
+          <div class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
+            <div
+              class="rounded-3xl bg-card p-6 text-center shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-elegant sm:p-8"
+            >
+              <div
+                class="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-gradient-primary text-primary-foreground shadow-soft"
+              >
+                <i data-lucide="award" class="h-7 w-7"></i>
+              </div>
+              <h3 class="mt-5 text-xl font-bold">خبرة أكثر من 10 سنوات</h3>
+              <p class="mt-3 text-sm leading-relaxed text-muted-foreground">
+                خبرة طويلة في صناعة التورتات الفاخرة والتصاميم المخصصة.
+              </p>
+            </div>
+            <div
+              class="rounded-3xl bg-card p-6 text-center shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-elegant sm:p-8"
+            >
+              <div
+                class="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-gradient-primary text-primary-foreground shadow-soft"
+              >
+                <i data-lucide="heart" class="h-7 w-7"></i>
+              </div>
+              <h3 class="mt-5 text-xl font-bold">مكونات طازجة وطبيعية</h3>
+              <p class="mt-3 text-sm leading-relaxed text-muted-foreground">
+                نستخدم أفخر أنواع الشوكولاتة والفواكه الطازجة يوميًا.
+              </p>
+            </div>
+            <div
+              class="rounded-3xl bg-card p-6 text-center shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-elegant sm:p-8"
+            >
+              <div
+                class="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-gradient-primary text-primary-foreground shadow-soft"
+              >
+                <i data-lucide="sparkles" class="h-7 w-7"></i>
+              </div>
+              <h3 class="mt-5 text-xl font-bold">تصميم مخصص لك</h3>
+              <p class="mt-3 text-sm leading-relaxed text-muted-foreground">
+                كل تورتة تُصنع خصيصًا حسب ذوقك ومناسبتك بأدق التفاصيل.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Gallery -->
+      <section id="gallery" class="py-16 sm:py-24">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="text-center">
+            <span
+              class="text-sm font-semibold uppercase tracking-widest text-gold-foreground"
+              >المعرض</span
+            >
+            <h2 class="mt-2 text-3xl font-bold sm:text-4xl lg:text-5xl">
+              أعمالنا <span class="text-gradient-gold">السابقة</span>
+            </h2>
+            <p class="mx-auto mt-4 max-w-2xl text-base text-muted-foreground">
+              اضغط على أي صورة لعرضها بحجم أكبر.
+            </p>
+          </div>
+
+          <div
+            id="gallery-grid"
+            class="mt-12 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4"
+          ></div>
+
+          <div class="mt-10 text-center">
+            <button
+              type="button"
+              id="gallery-load-more"
+              class="inline-flex items-center justify-center gap-2 rounded-full border-2 border-primary/20 bg-card px-8 py-3.5 text-base font-semibold text-primary transition-all hover:border-primary hover:bg-secondary"
+            >
+              عرض المزيد
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Reviews -->
+      <section id="reviews" class="bg-gradient-warm py-16 sm:py-24">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="text-center">
+            <span
+              class="text-sm font-semibold uppercase tracking-widest text-gold-foreground"
+              >آراء العملاء</span
+            >
+            <h2 class="mt-2 text-3xl font-bold sm:text-4xl lg:text-5xl">
+              ماذا يقول <span class="text-gradient-gold">عملاؤنا</span>
+            </h2>
+          </div>
+
+          <div
+            id="reviews-grid"
+            class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3"
+          ></div>
+        </div>
+      </section>
+
+      <!-- CTA Strip -->
+      <section class="py-16 sm:py-20">
+        <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <div
+            class="relative overflow-hidden rounded-3xl bg-gradient-primary p-8 text-center text-primary-foreground shadow-elegant sm:p-12"
+          >
+            <div
+              class="pointer-events-none absolute -top-16 -right-16 h-64 w-64 rounded-full bg-gold/30 blur-3xl"
+            ></div>
+            <h2 class="relative text-3xl font-bold sm:text-4xl">
+              مناسبة قريبة؟ اطلب تورتتك اليوم
+            </h2>
+            <p class="relative mx-auto mt-4 max-w-2xl text-base opacity-90">
+              تواصل معنا مباشرة عبر الواتساب وسنساعدك في اختيار التصميم المثالي.
+            </p>
+            <a
+              href="https://wa.me/201111539089"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="relative mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-base font-bold text-primary shadow-elegant transition-all hover:scale-105"
+            >
+              <i data-lucide="phone" class="h-5 w-5"></i>
+              تواصل عبر واتساب
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-border bg-card">
+      <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+          <div>
+            <div class="flex items-center gap-2">
+              <span
+                class="grid h-10 w-10 place-items-center rounded-full bg-gradient-primary text-primary-foreground"
+              >
+                <i data-lucide="cake" class="h-5 w-5"></i>
+              </span>
+              <span class="text-lg font-bold">
+                الشيف <span class="text-gradient-gold">أحمد</span>
+              </span>
+            </div>
+            <p class="mt-3 text-sm leading-relaxed text-muted-foreground">
+              تورتات وكيك مصنوع خصيصًا لكل مناسبة. جودة، ذوق، والتزام.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-sm font-bold uppercase tracking-wider">
+              روابط سريعة
+            </h3>
+            <ul class="mt-4 space-y-2 text-sm">
+              <li>
+                <a
+                  href="#home"
+                  class="nav-link text-muted-foreground transition-colors hover:text-primary"
+                  >الرئيسية</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#menu"
+                  class="nav-link text-muted-foreground transition-colors hover:text-primary"
+                  >قائمة التورتات</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#why"
+                  class="nav-link text-muted-foreground transition-colors hover:text-primary"
+                  >من نحن</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#gallery"
+                  class="nav-link text-muted-foreground transition-colors hover:text-primary"
+                  >المعرض</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#reviews"
+                  class="nav-link text-muted-foreground transition-colors hover:text-primary"
+                  >آراء العملاء</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="text-sm font-bold uppercase tracking-wider">
+              تواصل معنا
+            </h3>
+            <p class="mt-4 text-sm text-muted-foreground">
+              نستقبل طلباتكم يوميًا عبر الواتساب
+            </p>
+            <a
+              href="https://wa.me/201111539089"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="mt-4 inline-flex items-center gap-2 rounded-full bg-whatsapp px-5 py-2.5 text-sm font-semibold text-white transition-all hover:brightness-110"
+            >
+              <i data-lucide="phone" class="h-4 w-4"></i>
+              +20 111 153 9089
+            </a>
+          </div>
+        </div>
+
+        <div
+          class="mt-8 border-t border-border pt-6 text-center text-xs text-muted-foreground"
+        >
+          <span id="footer-year"></span> الشيف أحمد. جميع الحقوق محفوظة.
+        </div>
+      </div>
+    </footer>
+
+    <!-- Floating WhatsApp -->
+    <a
+      href="https://wa.me/201111539089"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="تواصل معنا عبر واتساب"
+      class="fixed bottom-5 start-5 z-30 grid h-14 w-14 place-items-center rounded-full bg-whatsapp text-white shadow-elegant transition-all hover:scale-110 sm:h-16 sm:w-16"
+    >
+      <span
+        class="absolute inset-0 animate-ping-slow rounded-full bg-whatsapp opacity-30"
+      ></span>
+      <svg
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        class="relative h-7 w-7 sm:h-8 sm:w-8"
+        aria-hidden="true"
+      >
+        <path
+          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+        />
+      </svg>
+    </a>
+
+    <!-- Lightbox -->
+    <div
+      id="lightbox"
+      class="fixed inset-0 z-50 hidden items-center justify-center bg-black/90 backdrop-blur-sm p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-label="عرض الصورة"
+    >
+      <button
+        type="button"
+        id="lightbox-close"
+        aria-label="إغلاق"
+        class="absolute top-4 end-4 grid h-11 w-11 place-items-center rounded-full bg-white/10 text-white backdrop-blur transition-colors hover:bg-white/20"
+      >
+        <i data-lucide="x" class="h-6 w-6"></i>
+      </button>
+      <button
+        type="button"
+        id="lightbox-prev"
+        aria-label="السابق"
+        class="absolute end-4 top-1/2 -translate-y-1/2 grid h-12 w-12 place-items-center rounded-full bg-white/10 text-white backdrop-blur transition-colors hover:bg-white/20 sm:end-6"
+      >
+        <i data-lucide="chevron-right" class="h-6 w-6"></i>
+      </button>
+      <button
+        type="button"
+        id="lightbox-next"
+        aria-label="التالي"
+        class="absolute start-4 top-1/2 -translate-y-1/2 grid h-12 w-12 place-items-center rounded-full bg-white/10 text-white backdrop-blur transition-colors hover:bg-white/20 sm:start-6"
+      >
+        <i data-lucide="chevron-left" class="h-6 w-6"></i>
+      </button>
+      <figure class="relative max-h-full max-w-5xl" id="lightbox-figure">
+        <img
+          id="lightbox-img"
+          src=""
+          alt=""
+          class="max-h-[85vh] w-auto rounded-2xl object-contain shadow-elegant"
+        />
+        <figcaption
+          id="lightbox-caption"
+          class="mt-3 text-center text-sm text-white/80"
+        ></figcaption>
+      </figure>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+      document.getElementById("hero-whatsapp-link").href = waLink(heroMessage);
+    </script>
+  </body>
+</html>
