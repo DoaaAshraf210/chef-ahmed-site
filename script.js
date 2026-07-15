@@ -7,45 +7,39 @@ const heroMessage = "مرحبًا، أريد الاستفسار عن طلب تو
 const CAKES = [
     {
         name: "كيك أعياد ميلاد",
-        desc: "تورتة عيد ميلاد بتصميم مخصص وألوان تفصيل حسب رغبتك.",
-        price: "من 350 ج.م",
-        image: `assets/1.jpg`,
-        fallback: "assets/1.jpg",
+
+        image: `assets/74.jpg`,
+        fallback: "assets/74.jpg",
     },
     {
         name: "تورتة مناسبات",
-        desc: "تورتات فاخرة للأفراح والخطوبة والذكرى، بديكور راقٍ.",
-        price: "من 750 ج.م",
-        image: "assets/5.jpg",
-        fallback: "assets/5.jpg",
+
+        image: "assets/66.jpg",
+        fallback: "assets/66.jpg",
     },
     {
         name: "كيك بالفواكه",
-        desc: "طبقات إسفنجية خفيفة مع فواكه طازجة وكريمة طبيعية.",
-        price: "من 400 ج.م",
-        image: "assets/10.jpg",
-        fallback: "assets/10.jpg",
+
+        image: "assets/6.jpg",
+        fallback: "assets/6.jpg",
     },
     {
         name: "تورتة شوكولاتة",
-        desc: "شوكولاتة بلجيكية غنية مع جاناش فاخر لعشاق الشوكولاتة.",
-        price: "من 380 ج.م",
-        image: "assets/15.png",
-        fallback: "assets/15.png",
+
+        image: "assets/70.jpg",
+        fallback: "assets/70.jpg",
     },
     {
         name: "ريد فيلفت",
-        desc: "الطعم الكلاسيكي لريد فيلفت مع كريمة الجبن الطازجة.",
-        price: "من 420 ج.م",
-        image: "assets/20.jpg",
-        fallback: "assets/20.jpg",
+
+        image: "assets/21.jpg",
+        fallback: "assets/21.jpg",
     },
     {
         name: "كب كيك مخصص",
-        desc: "كب كيك ملون بنكهات متعددة، مثالي للحفلات والتوزيعات.",
-        price: "من 25 ج.م / حبة",
-        image: "assets/25.jpg",
-        fallback: "assets/25.jpg",
+
+        image: "assets/61.jpg",
+        fallback: "assets/61.jpg",
     },
 ];
 
@@ -110,12 +104,7 @@ menuGrid.innerHTML = CAKES.map(
       </div>
       <div class="flex flex-1 flex-col p-5">
         <h3 class="text-lg font-bold sm:text-xl">${cake.name}</h3>
-        <p class="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">${cake.desc}</p>
-        <a href="${waLink()}" target="_blank" rel="noopener noreferrer"
-           class="mt-4 inline-flex items-center justify-center gap-2 rounded-full bg-whatsapp px-5 py-2.5 text-sm font-semibold text-white transition-all hover:brightness-110">
-          <i data-lucide="phone" class="h-4 w-4"></i>
-          اطلب الآن
-        </a>
+       
       </div>
     </article>
   `,
