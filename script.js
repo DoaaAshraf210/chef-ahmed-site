@@ -5,19 +5,19 @@ function waLink(message) {
 const heroMessage = "مرحبًا، أريد الاستفسار عن طلب تورتة";
 
 const CAKES = [
-    { name: "فانيليا", image: "assets/6.jpg", fallback: "assets/6.jpg" },
+    { name: "فانيليا", image: "assets/96.png", fallback: "assets/96.png" },
     { name: "شوكولاتة", image: "assets/70.jpg", fallback: "assets/70.jpg" },
-    { name: "نص ونص", image: "assets/2.jpg", fallback: "assets/2.jpg" },
+    { name: "نص ونص", image: "assets/6.jpg", fallback: "assets/6.jpg" },
     { name: "تورتة 4 سيزون", image: "assets/66.jpg", fallback: "assets/66.jpg" },
     { name: "بلاك فورست", image: "assets/74.jpg", fallback: "assets/74.jpg" },
-    { name: "تورتة فواكه", image: "assets/1.jpg", fallback: "assets/1.jpg" },
+    { name: "تورتة فواكه", image: "assets/95.jpg", fallback: "assets/95.jpg" },
 ];
 const GATEAU = [
     { name: "جاتو شوكولاتة", desc: "قطع جاتو شوكولاتة غنية، مثالية للتوزيع في الأفراح.", image: "assets/g-1.jpg", fallback: "assets/g-1.jpg" },
     { name: "جاتو فانيليا", desc: "طعم كلاسيكي خفيف، يناسب كل الأذواق.", image: "assets/g-2.jpg", fallback: "assets/g-2.jpg" },
-    { name: "جاتو نص ونص", desc: "مزيج شوكولاتة وفانيليا في قطعة واحدة.", image: "assets/g-3.jpg", fallback: "assets/g-3.jpg" },
+    { name: "جاتو نص ونص", desc: "مزيج شوكولاتة وفانيليا في قطعة واحدة.", image: "assets/g-3.png", fallback: "assets/g-3.png" },
 ];
-const GALLERY = Array.from({ length: 93 }, (_, i) => {
+const GALLERY = Array.from({ length: 96 }, (_, i) => {
     const n = i + 1;
     return {
         src: `assets/${n}.jpg`,
