@@ -124,6 +124,8 @@ h4 {
 .price-table tbody tr:last-child td {
   border-bottom: none;
 }
+
+/* 
 .price-steps {
   display: flex;
   align-items: flex-start;
@@ -215,4 +217,102 @@ h4 {
   color: var(--color-primary);
   background-color: var(--color-secondary);
   font-weight: 700;
+} */
+.price-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  position: relative;
+}
+
+.price-step {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.9rem;
+  width: 100%;
+  text-align: start;
+}
+
+.price-step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 44px;
+  right: 21px;
+  width: 2px;
+  height: calc(100% + 1.1rem - 44px);
+  background: linear-gradient(180deg, var(--gold), var(--color-primary));
+  z-index: 0;
+}
+
+.price-step-dot {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 999px;
+  background: var(--color-card);
+  border: 3px solid var(--gold);
+  color: var(--color-primary);
+  font-weight: 700;
+  font-size: 0.8rem;
+  box-shadow: var(--shadow-soft);
+}
+
+.price-step-label {
+  font-size: 0.85rem;
+  color: var(--color-muted-foreground);
+  font-weight: 600;
+}
+
+.price-step-price {
+  margin-inline-start: 0.4rem;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--color-primary);
+}
+
+@media (min-width: 900px) {
+  .price-steps {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .price-steps::before {
+    content: "";
+    position: absolute;
+    top: 22px;
+    right: 5%;
+    left: 5%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--color-primary));
+    border-radius: 999px;
+    z-index: 0;
+  }
+
+  .price-step {
+    flex-direction: column;
+    width: 84px;
+    text-align: center;
+    gap: 0;
+  }
+
+  .price-step:not(:last-child)::after {
+    content: none;
+  }
+
+  .price-step-label {
+    margin-top: 0.6rem;
+  }
+
+  .price-step-price {
+    margin-top: 0.15rem;
+    margin-inline-start: 0;
+  }
 }

@@ -13,9 +13,9 @@ const CAKES = [
     { name: "تورتة فواكه", image: "assets/19.jpg", fallback: "assets/19.jpg" },
 ];
 const GATEAU = [
-    { name: "جاتو شوكولاتة", desc: "قطع جاتو شوكولاتة غنية، مثالية للتوزيع في الأفراح.", image: "assets/g-1.jpg", fallback: "assets/g-1.jpg" },
+    { name: "جاتو شوكولاتة", desc: "قطع جاتو شوكولاتة غنية، مثالية للتوزيع في الأفراح.", image: "assets/g-3.png", fallback: "assets/g-3.png" },
     { name: "جاتو فانيليا", desc: "طعم كلاسيكي خفيف، يناسب كل الأذواق.", image: "assets/g-2.jpg", fallback: "assets/g-2.jpg" },
-    { name: "جاتو نص ونص", desc: "مزيج شوكولاتة وفانيليا في قطعة واحدة.", image: "assets/g-3.png", fallback: "assets/g-3.png" },
+    { name: "جاتو نص ونص", desc: "مزيج شوكولاتة وفانيليا في قطعة واحدة.", image: "assets/g-1.jpg", fallback: "assets/g-1.jpg" },
 ];
 const GALLERY = Array.from({ length: 102 }, (_, i) => {
     const n = i + 1;
