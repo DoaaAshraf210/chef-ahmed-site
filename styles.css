@@ -212,12 +212,12 @@ h4 {
     border-radius: 999px;
     z-index: 0;
   }
-}
+}*/
 .nav-link.active-link {
   color: var(--color-primary);
   background-color: var(--color-secondary);
   font-weight: 700;
-} */
+}
 .price-steps {
   display: flex;
   flex-direction: column;
