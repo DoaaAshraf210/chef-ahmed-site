@@ -18,11 +18,7 @@
   /* --color-border: oklch(0.9 0.02 30); */
   --color-border: oklch(0.82 0.03 30);
 
-  /* --shadow-soft: 0 10px 30px -12px
-    color-mix(in oklab, var(--color-primary) 25%, transparent);
-
- */
-
+ 
   --shadow-soft: 0 8px 24px -8px
     color-mix(in oklab, var(--color-primary) 35%, transparent);
   --shadow-elegant: 0 20px 50px -20px
