@@ -17,7 +17,7 @@ const GATEAU = [
     { name: "جاتو فانيليا", desc: "طعم كلاسيكي خفيف، يناسب كل الأذواق.", image: "assets/g-2.jpg", fallback: "assets/g-2.jpg" },
     { name: "جاتو نص ونص", desc: "مزيج شوكولاتة وفانيليا في قطعة واحدة.", image: "assets/g-3.jpg", fallback: "assets/g-3.jpg" },
 ];
-const GALLERY = Array.from({ length: 88 }, (_, i) => {
+const GALLERY = Array.from({ length: 93 }, (_, i) => {
     const n = i + 1;
     return {
         src: `assets/${n}.jpg`,
