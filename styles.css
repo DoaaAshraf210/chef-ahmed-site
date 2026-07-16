@@ -15,10 +15,16 @@
   --gold: oklch(0.78 0.13 80);
   --gold-foreground: oklch(0.25 0.05 40);
   --whatsapp: oklch(0.68 0.16 145);
-  --color-border: oklch(0.9 0.02 30);
+  /* --color-border: oklch(0.9 0.02 30); */
+  --color-border: oklch(0.82 0.03 30);
 
-  --shadow-soft: 0 10px 30px -12px
+  /* --shadow-soft: 0 10px 30px -12px
     color-mix(in oklab, var(--color-primary) 25%, transparent);
+
+ */
+
+  --shadow-soft: 0 8px 24px -8px
+    color-mix(in oklab, var(--color-primary) 35%, transparent);
   --shadow-elegant: 0 20px 50px -20px
     color-mix(in oklab, var(--color-primary) 35%, transparent);
 }
@@ -42,14 +48,20 @@ h4 {
   letter-spacing: -0.01em;
 }
 
-.bg-gradient-warm {
+/* .bg-gradient-warm {
   background-image: linear-gradient(
     135deg,
     oklch(0.97 0.03 30) 0%,
     oklch(0.94 0.04 15) 100%
   );
+} */
+.bg-gradient-warm {
+  background-image: linear-gradient(
+    135deg,
+    oklch(0.95 0.035 30) 0%,
+    oklch(0.9 0.05 15) 100%
+  );
 }
-
 .bg-gradient-primary {
   background-image: linear-gradient(
     135deg,
@@ -57,7 +69,7 @@ h4 {
     oklch(0.42 0.13 10) 100%
   );
 }
-
+/* 
 .text-gradient-gold {
   background-image: linear-gradient(
     135deg,
@@ -67,8 +79,17 @@ h4 {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+} */
+.text-gradient-gold {
+  background-image: linear-gradient(
+    135deg,
+    oklch(0.55 0.14 70),
+    oklch(0.42 0.13 45)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
-
 .shadow-soft {
   box-shadow: var(--shadow-soft);
 }
@@ -85,7 +106,8 @@ h4 {
   background-color: var(--gold);
 }
 .text-gold {
-  color: var(--gold);
+  /* color: var(--gold); */
+  color: oklch(0.62 0.15 70);
 }
 .text-gold-foreground {
   color: var(--gold-foreground);
@@ -213,7 +235,7 @@ h4 {
     z-index: 0;
   }
 }*/
-.nav-link.active-link {
+ul .nav-link.active-link {
   color: var(--color-primary);
   background-color: var(--color-secondary);
   font-weight: 700;
@@ -315,4 +337,10 @@ h4 {
     margin-top: 0.15rem;
     margin-inline-start: 0;
   }
+}
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 0.5rem;
 }

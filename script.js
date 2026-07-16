@@ -1,6 +1,7 @@
 const WHATSAPP_NUMBER = "201111539089";
 function waLink(message) {
-    return `https://wa.me/${WHATSAPP_NUMBER}`;
+    const text = message ? `?text=${encodeURIComponent(message)}` : "";
+    return `https://wa.me/${WHATSAPP_NUMBER}${text}`;
 }
 const heroMessage = "مرحبًا، أريد الاستفسار عن طلب تورتة";
 
@@ -67,10 +68,7 @@ function starsHTML(count) {
 }
 
 // Render hero stars
-document.getElementById("hero-stars").innerHTML = starsHTML(5).replace(
-    /h-4 w-4/g,
-    "h-4 w-4",
-);
+document.getElementById("hero-stars").innerHTML = starsHTML(5);
 
 // Render menu cards
 const menuGrid = document.getElementById("menu-grid");
@@ -84,7 +82,7 @@ menuGrid.innerHTML = CAKES.map(
       </div>
       <div class="flex flex-1 flex-col p-5">
         <h3 class="text-lg font-bold sm:text-xl">${cake.name}</h3>
-        <a href="${waLink()}" target="_blank" rel="noopener noreferrer"
+       <a href="${waLink(`مرحبًا، أريد الاستفسار عن تورتة ${cake.name}`)}" target="_blank" rel="noopener noreferrer"
            class="mt-4 inline-flex items-center justify-center gap-2 rounded-full bg-whatsapp px-5 py-2.5 text-sm font-semibold text-white transition-all hover:brightness-110">
           <i data-lucide="phone" class="h-4 w-4"></i>
           اطلب الآن
@@ -98,11 +96,44 @@ menuGrid.innerHTML = CAKES.map(
 const galleryGrid = document.getElementById("gallery-grid");
 const galleryLoadMoreBtn = document.getElementById("gallery-load-more");
 
-function renderGallery() {
-    const visible = GALLERY.slice(0, galleryVisibleCount);
-    galleryGrid.innerHTML = visible
-        .map(
-            (img, idx) => `
+// function renderGallery() {
+//     const visible = GALLERY.slice(0, galleryVisibleCount);
+//     galleryGrid.innerHTML = visible
+//         .map(
+//             (img, idx) => `
+//       <button type="button" data-index="${idx}"
+//               class="gallery-btn group relative aspect-square overflow-hidden rounded-2xl bg-muted shadow-soft transition-all duration-300 hover:shadow-elegant focus:outline-none focus:ring-4 focus:ring-primary/30"
+//               aria-label="عرض ${img.alt}">
+//         <img src="${img.src}" alt="${img.alt}" loading="lazy" width="1024" height="1024"
+//              class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+//              onerror="this.onerror=null; this.src='${img.fallback}';" />
+//         <div class="absolute inset-0 bg-primary/0 transition-colors duration-300 group-hover:bg-primary/20"></div>
+//       </button>
+//     `,
+//         )
+//         .join("");
+
+//     document.querySelectorAll(".gallery-btn").forEach((btn) => {
+//         btn.addEventListener("click", () =>
+//             openLightbox(parseInt(btn.dataset.index, 10)),
+//         );
+//     });
+
+//     if (galleryVisibleCount >= GALLERY.length) {
+//         galleryLoadMoreBtn.classList.add("hidden");
+//     } else {
+//         galleryLoadMoreBtn.classList.remove("hidden");
+//     }
+//     lucide.createIcons();
+// }
+function renderGallery(appendOnly = false) {
+    const start = appendOnly ? galleryVisibleCount - GALLERY_PAGE_SIZE : 0;
+    const visible = GALLERY.slice(start, galleryVisibleCount);
+
+    const html = visible
+        .map((img, i) => {
+            const idx = start + i;
+            return `
       <button type="button" data-index="${idx}"
               class="gallery-btn group relative aspect-square overflow-hidden rounded-2xl bg-muted shadow-soft transition-all duration-300 hover:shadow-elegant focus:outline-none focus:ring-4 focus:ring-primary/30"
               aria-label="عرض ${img.alt}">
@@ -111,11 +142,19 @@ function renderGallery() {
              onerror="this.onerror=null; this.src='${img.fallback}';" />
         <div class="absolute inset-0 bg-primary/0 transition-colors duration-300 group-hover:bg-primary/20"></div>
       </button>
-    `,
-        )
+    `;
+        })
         .join("");
 
+    if (appendOnly) {
+        galleryGrid.insertAdjacentHTML("beforeend", html);
+    } else {
+        galleryGrid.innerHTML = html;
+    }
+
     document.querySelectorAll(".gallery-btn").forEach((btn) => {
+        if (btn.dataset.bound) return;
+        btn.dataset.bound = "1";
         btn.addEventListener("click", () =>
             openLightbox(parseInt(btn.dataset.index, 10)),
         );
@@ -128,15 +167,20 @@ function renderGallery() {
     }
     lucide.createIcons();
 }
-
+// galleryLoadMoreBtn.addEventListener("click", () => {
+//     galleryVisibleCount = Math.min(
+//         galleryVisibleCount + GALLERY_PAGE_SIZE,
+//         GALLERY.length,
+//     );
+//     renderGallery();
+// });
 galleryLoadMoreBtn.addEventListener("click", () => {
     galleryVisibleCount = Math.min(
         galleryVisibleCount + GALLERY_PAGE_SIZE,
         GALLERY.length,
     );
-    renderGallery();
+    renderGallery(true);
 });
-
 // Render reviews
 const reviewsGrid = document.getElementById("reviews-grid");
 reviewsGrid.innerHTML = REVIEWS.map(
@@ -273,18 +317,36 @@ const lightboxCaption = document.getElementById("lightbox-caption");
 const lightboxFigure = document.getElementById("lightbox-figure");
 let lightboxIndex = null;
 
+// function openLightbox(idx) {
+//     lightboxIndex = idx;
+//     updateLightbox();
+//     lightbox.classList.remove("hidden");
+//     lightbox.classList.add("flex");
+//     document.body.style.overflow = "hidden";
+// }
+// function closeLightbox() {
+//     lightboxIndex = null;
+//     lightbox.classList.add("hidden");
+//     lightbox.classList.remove("flex");
+//     document.body.style.overflow = "";
+// }
 function openLightbox(idx) {
     lightboxIndex = idx;
     updateLightbox();
     lightbox.classList.remove("hidden");
     lightbox.classList.add("flex");
     document.body.style.overflow = "hidden";
+    document.getElementById("lightbox-close").focus();
 }
 function closeLightbox() {
+    const lastBtn = document.querySelector(
+        `.gallery-btn[data-index="${lightboxIndex}"]`,
+    );
     lightboxIndex = null;
     lightbox.classList.add("hidden");
     lightbox.classList.remove("flex");
     document.body.style.overflow = "";
+    if (lastBtn) lastBtn.focus();
 }
 function updateLightbox() {
     const img = GALLERY[lightboxIndex];
@@ -357,3 +419,10 @@ const sectionObserver = new IntersectionObserver(
 );
 
 sections.forEach((sec) => sectionObserver.observe(sec));
+document.getElementById("hero-whatsapp-link").href = waLink(heroMessage);
+
+
+
+
+
+
