@@ -7,17 +7,17 @@ const heroMessage = "مرحبًا، أريد الاستفسار عن طلب تو
 const CAKES = [
     { name: "فانيليا", image: "assets/96.png", fallback: "assets/96.png" },
     { name: "شوكولاتة", image: "assets/70.jpg", fallback: "assets/70.jpg" },
-    { name: "نص ونص", image: "assets/6.jpg", fallback: "assets/6.jpg" },
-    { name: "تورتة 4 سيزون", image: "assets/66.jpg", fallback: "assets/66.jpg" },
-    { name: "بلاك فورست", image: "assets/74.jpg", fallback: "assets/74.jpg" },
-    { name: "تورتة فواكه", image: "assets/95.jpg", fallback: "assets/95.jpg" },
+    { name: "نص ونص", image: "assets/73.jpg", fallback: "assets/73.jpg" },
+    { name: "تورتة 4 سيزون", image: "assets/forsession.jpg", fallback: "assets/forsession.jpg" },
+    { name: "بلاك فورست", image: "assets/blackforst.jpg", fallback: "assets/blackforst.jpg" },
+    { name: "تورتة فواكه", image: "assets/19.jpg", fallback: "assets/19.jpg" },
 ];
 const GATEAU = [
     { name: "جاتو شوكولاتة", desc: "قطع جاتو شوكولاتة غنية، مثالية للتوزيع في الأفراح.", image: "assets/g-1.jpg", fallback: "assets/g-1.jpg" },
     { name: "جاتو فانيليا", desc: "طعم كلاسيكي خفيف، يناسب كل الأذواق.", image: "assets/g-2.jpg", fallback: "assets/g-2.jpg" },
     { name: "جاتو نص ونص", desc: "مزيج شوكولاتة وفانيليا في قطعة واحدة.", image: "assets/g-3.png", fallback: "assets/g-3.png" },
 ];
-const GALLERY = Array.from({ length: 96 }, (_, i) => {
+const GALLERY = Array.from({ length: 102 }, (_, i) => {
     const n = i + 1;
     return {
         src: `assets/${n}.jpg`,
@@ -29,18 +29,20 @@ const GALLERY_PAGE_SIZE = 12;
 let galleryVisibleCount = GALLERY_PAGE_SIZE;
 
 const PRICING = [
-    { label: "الأصغر", price: "150 ج.م" },
-    { label: "مقاس 2", price: "230 ج.م" },
-    { label: "مقاس 3", price: "260 ج.م" },
-    { label: "مقاس 4", price: "280 ج.م" },
-    { label: "مقاس 5", price: "300 ج.م" },
-    { label: "مقاس 6", price: "350 ج.م" },
-    { label: "الأكبر", price: "450 ج.م" },
+    { label: "مقاس 18", price: "100 ج.م" },
+    { label: "مقاس 20", price: "170 ج.م" },
+    { label: "مقاس 22", price: "230 ج.م" },
+    { label: "مقاس 24", price: "300 ج.م" },
+    { label: "مقاس 26", price: "350 ج.م" },
+    { label: "مقاس 20×20", price: "250 ج.م" },
+    { label: "قلب وسط", price: "200 ج.م" },
+    { label: "قلب كبير", price: "300 ج.م" },
+    { label: "بيضاوي كبيرة", price: "300 ج.م" },
 ];
 
 const SPECIAL_PRICING = {
-    label: "تورتة بصورة مطبوعة (أعياد ميلاد / زفاف)",
-    price: "500 ج.م",
+    label: "تورتة بصورة مطبوعة (أي مقاس)",
+    price: "+80 ج.م على سعر المقاس",
 };
 const REVIEWS = [
     {
@@ -325,3 +327,33 @@ window.addEventListener("keydown", (e) => {
     if (e.key === "ArrowRight") prevImage(); // RTL: right = previous
     if (e.key === "ArrowLeft") nextImage();
 });
+// Active nav link on scroll (scrollspy)
+const sections = ["home", "menu", "gallery", "gateau", "pricing", "why", "reviews"]
+    .map((id) => document.getElementById(id))
+    .filter(Boolean);
+
+const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
+
+function setActiveLink(id) {
+    navLinks.forEach((link) => {
+        const href = link.getAttribute("href");
+        if (href === `#${id}`) {
+            link.classList.add("active-link");
+        } else {
+            link.classList.remove("active-link");
+        }
+    });
+}
+
+const sectionObserver = new IntersectionObserver(
+    (entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                setActiveLink(entry.target.id);
+            }
+        });
+    },
+    { rootMargin: "-45% 0px -45% 0px", threshold: 0 },
+);
+
+sections.forEach((sec) => sectionObserver.observe(sec));
