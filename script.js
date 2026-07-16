@@ -5,45 +5,18 @@ function waLink(message) {
 const heroMessage = "مرحبًا، أريد الاستفسار عن طلب تورتة";
 
 const CAKES = [
-    {
-        name: "كيك أعياد ميلاد",
-
-        image: `assets/74.jpg`,
-        fallback: "assets/74.jpg",
-    },
-    {
-        name: "تورتة مناسبات",
-
-        image: "assets/66.jpg",
-        fallback: "assets/66.jpg",
-    },
-    {
-        name: "كيك بالفواكه",
-
-        image: "assets/6.jpg",
-        fallback: "assets/6.jpg",
-    },
-    {
-        name: "تورتة شوكولاتة",
-
-        image: "assets/70.jpg",
-        fallback: "assets/70.jpg",
-    },
-    {
-        name: "ريد فيلفت",
-
-        image: "assets/21.jpg",
-        fallback: "assets/21.jpg",
-    },
-    {
-        name: "كب كيك مخصص",
-
-        image: "assets/61.jpg",
-        fallback: "assets/61.jpg",
-    },
+    { name: "فانيليا", image: "assets/6.jpg", fallback: "assets/6.jpg" },
+    { name: "شوكولاتة", image: "assets/70.jpg", fallback: "assets/70.jpg" },
+    { name: "نص ونص", image: "assets/2.jpg", fallback: "assets/2.jpg" },
+    { name: "تورتة 4 سيزون", image: "assets/66.jpg", fallback: "assets/66.jpg" },
+    { name: "بلاك فورست", image: "assets/74.jpg", fallback: "assets/74.jpg" },
+    { name: "تورتة فواكه", image: "assets/1.jpg", fallback: "assets/1.jpg" },
 ];
-
-// كل صور المعرض الحقيقية لأعمال الشيف أحمد
+const GATEAU = [
+    { name: "جاتو شوكولاتة", desc: "قطع جاتو شوكولاتة غنية، مثالية للتوزيع في الأفراح.", image: "assets/g-1.jpg", fallback: "assets/g-1.jpg" },
+    { name: "جاتو فانيليا", desc: "طعم كلاسيكي خفيف، يناسب كل الأذواق.", image: "assets/g-2.jpg", fallback: "assets/g-2.jpg" },
+    { name: "جاتو نص ونص", desc: "مزيج شوكولاتة وفانيليا في قطعة واحدة.", image: "assets/g-3.jpg", fallback: "assets/g-3.jpg" },
+];
 const GALLERY = Array.from({ length: 88 }, (_, i) => {
     const n = i + 1;
     return {
@@ -56,14 +29,19 @@ const GALLERY_PAGE_SIZE = 12;
 let galleryVisibleCount = GALLERY_PAGE_SIZE;
 
 const PRICING = [
-    { size: "6 أشخاص", price: "150 ج.م" },
-    { size: "8 أشخاص", price: "220 ج.م" },
-    { size: "10 أشخاص", price: "300 ج.م" },
-    { size: "12 شخصًا", price: "380 ج.م" },
-    { size: "16 شخصًا", price: "500 ج.م" },
-    { size: "20 شخصًا", price: "650 ج.م" },
+    { label: "الأصغر", price: "150 ج.م" },
+    { label: "مقاس 2", price: "230 ج.م" },
+    { label: "مقاس 3", price: "260 ج.م" },
+    { label: "مقاس 4", price: "280 ج.م" },
+    { label: "مقاس 5", price: "300 ج.م" },
+    { label: "مقاس 6", price: "350 ج.م" },
+    { label: "الأكبر", price: "450 ج.م" },
 ];
 
+const SPECIAL_PRICING = {
+    label: "تورتة بصورة مطبوعة (أعياد ميلاد / زفاف)",
+    price: "500 ج.م",
+};
 const REVIEWS = [
     {
         name: "منى إبراهيم",
@@ -104,7 +82,11 @@ menuGrid.innerHTML = CAKES.map(
       </div>
       <div class="flex flex-1 flex-col p-5">
         <h3 class="text-lg font-bold sm:text-xl">${cake.name}</h3>
-       
+        <a href="${waLink()}" target="_blank" rel="noopener noreferrer"
+           class="mt-4 inline-flex items-center justify-center gap-2 rounded-full bg-whatsapp px-5 py-2.5 text-sm font-semibold text-white transition-all hover:brightness-110">
+          <i data-lucide="phone" class="h-4 w-4"></i>
+          اطلب الآن
+        </a>
       </div>
     </article>
   `,
@@ -174,18 +156,48 @@ reviewsGrid.innerHTML = REVIEWS.map(
 document.getElementById("footer-year").textContent =
     new Date().getFullYear();
 
-const pricingBody = document.getElementById("pricing-body");
-if (pricingBody) {
-    pricingBody.innerHTML = PRICING.map(
-        (item) => `
-      <tr class="border-b border-border/60 text-right">
-        <td class="px-4 py-3 font-semibold text-foreground">${item.size}</td>
-        <td class="px-4 py-3 text-left font-bold text-primary">${item.price}</td>
-      </tr>
+
+const pricingSteps = document.getElementById("pricing-steps");
+if (pricingSteps) {
+    pricingSteps.innerHTML = PRICING.map(
+        (item, idx) => `
+      <div class="price-step">
+        <div class="price-step-dot">${idx + 1}</div>
+        <span class="price-step-label">${item.label}</span>
+        <span class="price-step-price">${item.price}</span>
+      </div>
     `,
     ).join("");
 }
-
+const gateauGrid = document.getElementById("gateau-grid");
+if (gateauGrid) {
+    gateauGrid.innerHTML = GATEAU.map(
+        (item) => `
+      <article class="group flex flex-col overflow-hidden rounded-3xl bg-card shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-elegant">
+        <div class="relative aspect-[4/3] overflow-hidden">
+          <img src="${item.image}" alt="${item.name}" loading="lazy" width="1024" height="1024"
+               class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+               onerror="this.onerror=null; this.src='${item.fallback}';" />
+        </div>
+        <div class="flex flex-1 flex-col p-5">
+          <h3 class="text-lg font-bold sm:text-xl">${item.name}</h3>
+          <p class="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">${item.desc}</p>
+          <a href="${waLink()}" target="_blank" rel="noopener noreferrer"
+             class="mt-4 inline-flex items-center justify-center gap-2 rounded-full bg-whatsapp px-5 py-2.5 text-sm font-semibold text-white transition-all hover:brightness-110">
+            <i data-lucide="phone" class="h-4 w-4"></i>
+            اطلب بالقطعة
+          </a>
+        </div>
+      </article>
+    `,
+    ).join("");
+}
+const specialLabel = document.getElementById("special-pricing-label");
+const specialPrice = document.getElementById("special-pricing-price");
+if (specialLabel && specialPrice) {
+    specialLabel.textContent = SPECIAL_PRICING.label;
+    specialPrice.textContent = SPECIAL_PRICING.price;
+}
 // Render gallery (first page)
 renderGallery();
 

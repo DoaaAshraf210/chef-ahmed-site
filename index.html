@@ -67,7 +67,8 @@
             <a
               href="#menu"
               class="nav-link rounded-full px-4 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-secondary hover:text-primary"
-              >قائمة التورتات</a
+            >
+              التورتات</a
             >
           </li>
           <li>
@@ -79,11 +80,12 @@
           </li>
           <li>
             <a
-              href="#why"
-              class="nav-link rounded-full px-4 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-secondary hover:text-primary"
-              >من نحن</a
-            >
+              href="#gateau"
+              class="nav-link block rounded-xl px-4 py-3 text-base font-medium text-foreground/90 transition-colors hover:bg-secondary hover:text-primary"
+              >جاتوهات
+            </a>
           </li>
+
           <li>
             <a
               href="#gallery"
@@ -91,13 +93,13 @@
               >المعرض</a
             >
           </li>
-          <li>
+          <!-- <li>
             <a
               href="#reviews"
               class="nav-link rounded-full px-4 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-secondary hover:text-primary"
               >آراء العملاء</a
             >
-          </li>
+          </li> -->
         </ul>
 
         <div class="flex items-center gap-2">
@@ -141,7 +143,8 @@
             <a
               href="#menu"
               class="nav-link block rounded-xl px-4 py-3 text-base font-medium text-foreground/90 transition-colors hover:bg-secondary hover:text-primary"
-              >قائمة التورتات</a
+            >
+              التورتات</a
             >
           </li>
           <li>
@@ -153,11 +156,18 @@
           </li>
           <li>
             <a
+              href="#gateau"
+              class="nav-link block rounded-xl px-4 py-3 text-base font-medium text-foreground/90 transition-colors hover:bg-secondary hover:text-primary"
+              >جاتوهات
+            </a>
+          </li>
+          <!-- <li>
+            <a
               href="#why"
               class="nav-link block rounded-xl px-4 py-3 text-base font-medium text-foreground/90 transition-colors hover:bg-secondary hover:text-primary"
               >من نحن</a
             >
-          </li>
+          </li> -->
           <li>
             <a
               href="#gallery"
@@ -165,13 +175,13 @@
               >المعرض</a
             >
           </li>
-          <li>
+          <!-- <li>
             <a
               href="#reviews"
               class="nav-link block rounded-xl px-4 py-3 text-base font-medium text-foreground/90 transition-colors hover:bg-secondary hover:text-primary"
               >آراء العملاء</a
             >
-          </li>
+          </li> -->
           <li>
             <a
               href="https://wa.me/201111539089"
@@ -288,15 +298,15 @@
       <section id="menu" class="py-16 sm:py-24">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div class="text-center">
-            <span
+            html<span
               class="text-sm font-semibold uppercase tracking-widest text-gold-foreground"
               >قائمتنا</span
             >
             <h2 class="mt-2 text-3xl font-bold sm:text-4xl lg:text-5xl">
-              الأكثر طلبًا من <span class="text-gradient-gold">تورتاتنا</span>
+              اختر <span class="text-gradient-gold">نكهتك المفضلة</span>
             </h2>
             <p class="mx-auto mt-4 max-w-2xl text-base text-muted-foreground">
-              اختر من مجموعتنا المميزة، أو تواصل معنا لتصميم تورتة خاصة بك
+              تشكيلة من أشهى النكهات، أو تواصل معنا لتصميم تورتة خاصة بك
               بالكامل.
             </p>
           </div>
@@ -325,16 +335,21 @@
             </p>
           </div>
 
-          <div class="mt-10 overflow-hidden rounded-3xl bg-card shadow-soft">
-            <table class="price-table w-full text-sm sm:text-base">
-              <thead>
-                <tr class="bg-secondary text-secondary-foreground">
-                  <th scope="col" class="text-right">المقاس</th>
-                  <th scope="col" class="text-left">السعر</th>
-                </tr>
-              </thead>
-              <tbody id="pricing-body"></tbody>
-            </table>
+          <div class="mt-10 rounded-3xl bg-card p-6 shadow-soft sm:p-10">
+            <div id="pricing-steps" class="price-steps"></div>
+          </div>
+
+          <div
+            class="mt-6 rounded-2xl border border-gold/30 bg-gold/10 px-5 py-4 text-center"
+          >
+            <p
+              class="text-sm font-semibold text-foreground"
+              id="special-pricing-label"
+            ></p>
+            <p
+              class="mt-1 text-lg font-bold text-primary"
+              id="special-pricing-price"
+            ></p>
           </div>
 
           <p class="mt-6 text-center text-sm text-muted-foreground">
@@ -354,7 +369,41 @@
           </div>
         </div>
       </section>
+      <!-- Gateau (event pieces) -->
+      <section id="gateau" class="py-16 sm:py-24">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="text-center">
+            <span
+              class="text-sm font-semibold uppercase tracking-widest text-gold-foreground"
+              >للمناسبات والأفراح</span
+            >
+            <h2 class="mt-2 text-3xl font-bold sm:text-4xl lg:text-5xl">
+              جاتوهات <span class="text-gradient-gold">المناسبات</span>
+            </h2>
+            <p class="mx-auto mt-4 max-w-2xl text-base text-muted-foreground">
+              جاتو جاهز يُطلب بالقطعة، مثالي للأفراح والمناسبات الكبيرة. حدد عدد
+              القطع المطلوب وسنجهزها لك.
+            </p>
+          </div>
 
+          <div
+            id="gateau-grid"
+            class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          ></div>
+
+          <div class="mt-10 text-center">
+            <a
+              href="https://wa.me/201111539089"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center gap-2 rounded-full bg-whatsapp px-8 py-3.5 text-base font-semibold text-white shadow-soft transition-all hover:scale-105 hover:brightness-110"
+            >
+              <i data-lucide="phone" class="h-5 w-5"></i>
+              اطلب جاتو مناسبتك (حدد عدد القطع)
+            </a>
+          </div>
+        </div>
+      </section>
       <!-- Why Us -->
       <section id="why" class="py-16 sm:py-24">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -530,7 +579,8 @@
                 <a
                   href="#menu"
                   class="nav-link text-muted-foreground transition-colors hover:text-primary"
-                  >قائمة التورتات</a
+                >
+                  التورتات</a
                 >
               </li>
               <li>
@@ -547,13 +597,13 @@
                   >المعرض</a
                 >
               </li>
-              <li>
+              <!-- <li>
                 <a
                   href="#reviews"
                   class="nav-link text-muted-foreground transition-colors hover:text-primary"
                   >آراء العملاء</a
                 >
-              </li>
+              </li> -->
             </ul>
           </div>
 
