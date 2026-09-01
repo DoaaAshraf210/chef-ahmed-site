@@ -1,0 +1,9 @@
+## .NET / Visual Studio
+bin/
+obj/
+*.user
+*.suo
+.vs/
+
+## appsettings with secrets - keep a template instead
+appsettings.Development.json
