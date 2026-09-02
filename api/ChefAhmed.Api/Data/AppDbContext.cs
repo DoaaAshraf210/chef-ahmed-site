@@ -14,5 +14,6 @@ namespace ChefAhmed.Api.Data
         public DbSet<SizePricing> SizePricings { get; set; }
         public DbSet<PortfolioImage> PortfolioImages { get; set; }
         public DbSet<AdminUser> AdminUsers { get; set; }
+        public DbSet<SpecialPricing> SpecialPricings { get; set; }
     }
 }

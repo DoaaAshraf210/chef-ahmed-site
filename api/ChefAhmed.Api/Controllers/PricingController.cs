@@ -69,6 +69,33 @@ namespace ChefAhmed.Api.Controllers
             _context.SizePricings.Remove(pricing);
             await _context.SaveChangesAsync();
             return NoContent();
+        }// GET: api/pricing/special
+        [HttpGet("special")]
+        public async Task<ActionResult<SpecialPricing>> GetSpecialPricing()
+        {
+            var special = await _context.SpecialPricings.FirstOrDefaultAsync();
+            if (special == null) return NotFound();
+            return Ok(special);
+        }
+
+        // PUT: api/pricing/special
+        [HttpPut("special")]
+        [Authorize]
+        public async Task<IActionResult> UpdateSpecialPricing(SpecialPricing updated)
+        {
+            var special = await _context.SpecialPricings.FirstOrDefaultAsync();
+            if (special == null)
+            {
+                updated.Id = 0;
+                _context.SpecialPricings.Add(updated);
+            }
+            else
+            {
+                special.Label = updated.Label;
+                special.Price = updated.Price;
+            }
+            await _context.SaveChangesAsync();
+            return NoContent();
         }
     }
 }
