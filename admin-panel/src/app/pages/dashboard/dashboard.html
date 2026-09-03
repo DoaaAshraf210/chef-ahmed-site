@@ -16,62 +16,39 @@
   <nav
     class="bg-[var(--color-card)] border-b border-[var(--color-border)] px-6 flex gap-2 overflow-x-auto"
   >
-    <button
-      (click)="setTab('portfolio')"
-      class="px-4 py-3 text-sm font-medium border-b-2 transition whitespace-nowrap cursor-pointer"
-      [class]="
-        activeTab() === 'portfolio'
-          ? 'border-[var(--color-primary)] text-[var(--color-primary)]'
-          : 'border-transparent text-[var(--color-muted-foreground)]'
-      "
+    <a
+      routerLink="portfolio"
+      routerLinkActive="border-[var(--color-primary)] text-[var(--color-primary)]"
+      [routerLinkActiveOptions]="{ exact: false }"
+      class="px-4 py-3 text-sm font-medium border-b-2 border-transparent text-[var(--color-muted-foreground)] transition whitespace-nowrap cursor-pointer"
     >
       المعرض
-    </button>
-    <button
-      (click)="setTab('cakes')"
-      class="px-4 py-3 text-sm font-medium border-b-2 transition whitespace-nowrap cursor-pointer"
-      [class]="
-        activeTab() === 'cakes'
-          ? 'border-[var(--color-primary)] text-[var(--color-primary)]'
-          : 'border-transparent text-[var(--color-muted-foreground)]'
-      "
+    </a>
+    <a
+      routerLink="cakes"
+      routerLinkActive="border-[var(--color-primary)] text-[var(--color-primary)]"
+      class="px-4 py-3 text-sm font-medium border-b-2 border-transparent text-[var(--color-muted-foreground)] transition whitespace-nowrap cursor-pointer"
     >
       التورتات
-    </button>
-    <button
-      (click)="setTab('gateaux')"
-      class="px-4 py-3 text-sm font-medium border-b-2 transition whitespace-nowrap cursor-pointer"
-      [class]="
-        activeTab() === 'gateaux'
-          ? 'border-[var(--color-primary)] text-[var(--color-primary)]'
-          : 'border-transparent text-[var(--color-muted-foreground)]'
-      "
+    </a>
+    <a
+      routerLink="gateaux"
+      routerLinkActive="border-[var(--color-primary)] text-[var(--color-primary)]"
+      class="px-4 py-3 text-sm font-medium border-b-2 border-transparent text-[var(--color-muted-foreground)] transition whitespace-nowrap cursor-pointer"
     >
       الجاتوهات
-    </button>
-    <button
-      (click)="setTab('pricing')"
-      class="px-4 py-3 text-sm font-medium border-b-2 transition whitespace-nowrap cursor-pointer"
-      [class]="
-        activeTab() === 'pricing'
-          ? 'border-[var(--color-primary)] text-[var(--color-primary)]'
-          : 'border-transparent text-[var(--color-muted-foreground)]'
-      "
+    </a>
+    <a
+      routerLink="pricing"
+      routerLinkActive="border-[var(--color-primary)] text-[var(--color-primary)]"
+      class="px-4 py-3 text-sm font-medium border-b-2 border-transparent text-[var(--color-muted-foreground)] transition whitespace-nowrap cursor-pointer"
     >
       الأسعار
-    </button>
+    </a>
   </nav>
 
   <!-- Content -->
   <main class="p-6 max-w-6xl mx-auto">
-    @if (activeTab() === 'portfolio') {
-      <app-portfolio-tab></app-portfolio-tab>
-    } @else if (activeTab() === 'pricing') {
-      <app-pricing-tab></app-pricing-tab>
-    } @else if (activeTab() === 'gateaux') {
-      <app-gateaux-tab></app-gateaux-tab>
-    } @else if (activeTab() === 'cakes') {
-      <app-cakes-tab></app-cakes-tab>
-    }
+    <router-outlet></router-outlet>
   </main>
 </div>

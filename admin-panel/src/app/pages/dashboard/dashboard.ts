@@ -1,25 +1,16 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { Auth } from '../../services/auth';
-import { PortfolioTab } from './portfolio-tab/portfolio-tab';
-import { PricingTab } from './pricing-tab/pricing-tab';
-import { GateauxTab } from './gateaux-tab/gateaux-tab';
-import { CakesTab } from "./cakes-tab/cakes-tab";
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 type TabKey = 'portfolio' | 'cakes' | 'gateaux' | 'pricing';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [PortfolioTab, PricingTab, GateauxTab, CakesTab],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
 export class Dashboard {
-  activeTab = signal<TabKey>('portfolio');
-
   constructor(private authService: Auth) {}
-
-  setTab(tab: TabKey) {
-    this.activeTab.set(tab);
-  }
 
   logout() {
     this.authService.logout();
