@@ -1,0 +1,169 @@
+<div class="space-y-6">
+  <div>
+    <h2 class="text-xl font-bold text-[var(--color-foreground)] mb-1">الأسعار حسب الحجم</h2>
+    <p class="text-sm text-[var(--color-muted-foreground)]">
+      إدارة قائمة المقاسات والأسعار اللي بتظهر في قسم "الأسعار"
+    </p>
+  </div>
+
+  @if (errorMessage()) {
+    <p class="text-sm text-center" style="color: oklch(0.55 0.2 25)">{{ errorMessage() }}</p>
+  }
+
+  <!-- إضافة حجم جديد -->
+  <div
+    class="bg-[var(--color-card)] rounded-[var(--radius)] shadow-soft p-5 border border-[var(--color-border)]"
+  >
+    <h3 class="font-semibold mb-3 text-[var(--color-foreground)]">إضافة مقاس جديد</h3>
+    <div class="flex flex-col sm:flex-row gap-3">
+      <input
+        type="text"
+        [(ngModel)]="newLabel"
+        placeholder="اسم المقاس (مثال: مقاس 28)"
+        class="flex-1 border border-[var(--color-border)] bg-[var(--color-background)] rounded-lg px-4 py-2 text-right focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
+      />
+      <input
+        type="text"
+        [(ngModel)]="newPrice"
+        placeholder="السعر (مثال: 250 ج.م)"
+        class="w-full sm:w-48 border border-[var(--color-border)] bg-[var(--color-background)] rounded-lg px-4 py-2 text-right focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
+      />
+      <button
+        (click)="addItem()"
+        [disabled]="isAdding() || !newLabel.trim() || !newPrice.trim()"
+        class="bg-gradient-primary text-[var(--color-primary-foreground)] rounded-lg px-6 py-2 font-semibold shadow-soft hover:opacity-90 transition disabled:opacity-50 whitespace-nowrap cursor-pointer"
+      >
+        {{ isAdding() ? 'جاري الإضافة...' : 'إضافة' }}
+      </button>
+    </div>
+  </div>
+
+  <!-- قائمة الأحجام -->
+  @if (isLoading()) {
+    <p class="text-center text-[var(--color-muted-foreground)] py-8">جاري التحميل...</p>
+  } @else if (items().length === 0) {
+    <p class="text-center text-[var(--color-muted-foreground)] py-8">مفيش مقاسات مضافة لسه</p>
+  } @else {
+    <div
+      class="bg-[var(--color-card)] rounded-[var(--radius)] shadow-soft border border-[var(--color-border)] divide-y divide-[var(--color-border)]"
+    >
+      @for (item of items(); track item.id) {
+        <div class="p-4 flex flex-col sm:flex-row sm:items-center gap-3">
+          @if (editingId() === item.id) {
+            <input
+              type="text"
+              [(ngModel)]="editLabel"
+              class="flex-1 border border-[var(--color-border)] bg-[var(--color-background)] rounded-lg px-3 py-1.5 text-right focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
+            />
+            <input
+              type="text"
+              [(ngModel)]="editPrice"
+              class="w-full sm:w-40 border border-[var(--color-border)] bg-[var(--color-background)] rounded-lg px-3 py-1.5 text-right focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
+            />
+            <div class="flex gap-2">
+              <button
+                (click)="saveEdit(item)"
+                [disabled]="isSaving()"
+                class="text-sm bg-gradient-primary text-[var(--color-primary-foreground)] rounded-lg px-4 py-1.5 font-semibold cursor-pointer disabled:opacity-50"
+              >
+                حفظ
+              </button>
+              <button
+                (click)="cancelEdit()"
+                class="text-sm bg-[var(--color-secondary)] text-[var(--color-secondary-foreground)] rounded-lg px-4 py-1.5 font-semibold cursor-pointer"
+              >
+                إلغاء
+              </button>
+            </div>
+          } @else {
+            <span class="flex-1 font-medium text-[var(--color-foreground)]">{{
+              item.sizeLabel
+            }}</span>
+            <span class="font-bold text-[var(--color-primary)] w-32">{{ item.price }}</span>
+            <div class="flex gap-2">
+              <button
+                (click)="startEdit(item)"
+                class="text-sm bg-[var(--color-secondary)] text-[var(--color-secondary-foreground)] rounded-lg px-4 py-1.5 font-semibold cursor-pointer hover:opacity-80 transition"
+              >
+                تعديل
+              </button>
+              <button
+                (click)="confirmDelete(item)"
+                class="text-sm text-white rounded-lg px-4 py-1.5 font-semibold cursor-pointer hover:opacity-80 transition"
+                style="background-color: oklch(0.55 0.2 25)"
+              >
+                حذف
+              </button>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  }
+
+  <!-- السعر الخاص -->
+  <div class="bg-[var(--color-card)] rounded-[var(--radius)] shadow-soft p-5 border border-gold">
+    <h3 class="font-semibold mb-3 text-[var(--color-foreground)]">
+      السعر الخاص (تورتة بصورة مطبوعة)
+    </h3>
+    <div class="flex flex-col sm:flex-row gap-3">
+      <input
+        type="text"
+        [(ngModel)]="specialLabel"
+        placeholder="النص (مثال: تورتة بصورة مطبوعة (أي مقاس))"
+        class="flex-1 border border-[var(--color-border)] bg-[var(--color-background)] rounded-lg px-4 py-2 text-right focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
+      />
+      <input
+        type="text"
+        [(ngModel)]="specialPrice"
+        placeholder="السعر (مثال: +80 ج.م على سعر المقاس)"
+        class="w-full sm:w-64 border border-[var(--color-border)] bg-[var(--color-background)] rounded-lg px-4 py-2 text-right focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
+      />
+      <button
+        (click)="saveSpecial()"
+        [disabled]="isSavingSpecial() || !specialLabel.trim() || !specialPrice.trim()"
+        class="bg-gradient-primary text-[var(--color-primary-foreground)] rounded-lg px-6 py-2 font-semibold shadow-soft hover:opacity-90 transition disabled:opacity-50 whitespace-nowrap cursor-pointer"
+      >
+        {{ isSavingSpecial() ? 'جاري الحفظ...' : 'حفظ' }}
+      </button>
+    </div>
+    @if (specialSaved()) {
+      <p class="text-sm mt-2 text-center" style="color: oklch(0.6 0.15 145)">تم الحفظ ✓</p>
+    }
+  </div>
+
+  <!-- Modal تأكيد الحذف -->
+  @if (itemToDelete()) {
+    <div
+      class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+      (click)="cancelDelete()"
+    >
+      <div
+        class="bg-[var(--color-card)] rounded-[var(--radius)] shadow-elegant p-6 w-full max-w-sm"
+        (click)="$event.stopPropagation()"
+      >
+        <h3 class="font-bold text-lg text-center mb-2 text-[var(--color-foreground)]">
+          تأكيد الحذف
+        </h3>
+        <p class="text-sm text-center text-[var(--color-muted-foreground)] mb-5">
+          متأكدة إنك عايزة تمسحي "{{ itemToDelete()?.sizeLabel }}"؟
+        </p>
+        <div class="flex gap-3">
+          <button
+            (click)="cancelDelete()"
+            class="flex-1 bg-[var(--color-secondary)] text-[var(--color-secondary-foreground)] rounded-lg py-2.5 font-semibold hover:opacity-80 transition cursor-pointer"
+          >
+            إلغاء
+          </button>
+          <button
+            (click)="deleteConfirmed()"
+            class="flex-1 text-white rounded-lg py-2.5 font-semibold transition cursor-pointer"
+            style="background-color: oklch(0.55 0.2 25)"
+          >
+            حذف
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+</div>

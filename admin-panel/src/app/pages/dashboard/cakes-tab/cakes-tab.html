@@ -1,0 +1,159 @@
+<div class="space-y-6">
+  <div class="flex items-center justify-between">
+    <div>
+      <h2 class="text-xl font-bold text-[var(--color-foreground)] mb-1">التورتات</h2>
+      <p class="text-sm text-[var(--color-muted-foreground)]">إدارة النكهات اللي بتظهر في قسم "اختر نكهتك المفضلة"</p>
+    </div>
+    <button
+      (click)="openAddForm()"
+      class="bg-gradient-primary text-[var(--color-primary-foreground)] rounded-lg px-5 py-2.5 font-semibold shadow-soft hover:opacity-90 transition cursor-pointer whitespace-nowrap"
+    >
+      + إضافة تورتة جديدة
+    </button>
+  </div>
+
+  @if (errorMessage()) {
+    <p class="text-sm text-center" style="color: oklch(0.55 0.2 25)">{{ errorMessage() }}</p>
+  }
+
+  @if (isLoading()) {
+    <p class="text-center text-[var(--color-muted-foreground)] py-8">جاري التحميل...</p>
+  } @else if (items().length === 0) {
+    <p class="text-center text-[var(--color-muted-foreground)] py-8">مفيش تورتات مضافة لسه</p>
+  } @else {
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      @for (item of items(); track item.id) {
+        <div class="bg-[var(--color-card)] rounded-[var(--radius)] shadow-soft border border-[var(--color-border)] overflow-hidden">
+          <img [src]="item.imageUrl" [alt]="item.name" class="w-full aspect-[4/3] object-cover" />
+          <div class="p-4">
+            <h3 class="font-bold text-[var(--color-foreground)]">{{ item.name }}</h3>
+            @if (item.description) {
+              <p class="text-sm text-[var(--color-muted-foreground)] mt-1">{{ item.description }}</p>
+            }
+            <div class="flex gap-2 mt-4">
+              <button
+                (click)="openEditForm(item)"
+                class="flex-1 text-sm bg-[var(--color-secondary)] text-[var(--color-secondary-foreground)] rounded-lg py-2 font-semibold cursor-pointer hover:opacity-80 transition"
+              >
+                تعديل
+              </button>
+              <button
+                (click)="confirmDelete(item)"
+                class="flex-1 text-sm text-white rounded-lg py-2 font-semibold cursor-pointer hover:opacity-80 transition"
+                style="background-color: oklch(0.55 0.2 25)"
+              >
+                حذف
+              </button>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  }
+
+  <!-- Modal إضافة/تعديل -->
+  @if (showForm()) {
+    <div class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4" (click)="closeForm()">
+      <div
+        class="bg-[var(--color-card)] rounded-[var(--radius)] shadow-elegant p-6 w-full max-w-md max-h-[90vh] overflow-y-auto"
+        (click)="$event.stopPropagation()"
+      >
+        <h3 class="font-bold text-lg mb-4 text-[var(--color-foreground)]">
+          {{ editingItem() ? 'تعديل التورتة' : 'إضافة تورتة جديدة' }}
+        </h3>
+
+        <div class="space-y-3">
+          <div>
+            <label class="block text-sm font-medium text-[var(--color-foreground)] mb-1">الاسم</label>
+            <input
+              type="text"
+              [(ngModel)]="formName"
+              class="w-full border border-[var(--color-border)] bg-[var(--color-background)] rounded-lg px-4 py-2 text-right focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
+            />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-[var(--color-foreground)] mb-1">الوصف (اختياري)</label>
+            <textarea
+              [(ngModel)]="formDescription"
+              rows="2"
+              class="w-full border border-[var(--color-border)] bg-[var(--color-background)] rounded-lg px-4 py-2 text-right focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
+            ></textarea>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-[var(--color-foreground)] mb-1">الصورة</label>
+            @if (formImageUrl) {
+              <img [src]="formImageUrl" class="w-full aspect-[4/3] object-cover rounded-lg mb-2" />
+            }
+            <label
+              class="flex items-center justify-center gap-2 border-2 border-dashed border-[var(--color-border)] rounded-lg py-4 cursor-pointer hover:border-[var(--color-primary)] transition"
+              [class.opacity-50]="isUploadingImage()"
+            >
+              <input
+                type="file"
+                accept="image/*"
+                class="hidden"
+                (change)="onImageSelected($event)"
+                [disabled]="isUploadingImage()"
+              />
+              <span class="text-sm text-[var(--color-muted-foreground)]">
+                {{ isUploadingImage() ? 'جاري الرفع...' : (formImageUrl ? 'تغيير الصورة' : 'اختيار صورة') }}
+              </span>
+            </label>
+          </div>
+        </div>
+
+        @if (formErrorMessage()) {
+          <p class="text-sm text-center mt-3" style="color: oklch(0.55 0.2 25)">{{ formErrorMessage() }}</p>
+        }
+
+        <div class="flex gap-3 mt-5">
+          <button
+            (click)="closeForm()"
+            class="flex-1 bg-[var(--color-secondary)] text-[var(--color-secondary-foreground)] rounded-lg py-2.5 font-semibold hover:opacity-80 transition cursor-pointer"
+          >
+            إلغاء
+          </button>
+          <button
+            (click)="saveForm()"
+            [disabled]="isSaving() || isUploadingImage()"
+            class="flex-1 bg-gradient-primary text-[var(--color-primary-foreground)] rounded-lg py-2.5 font-semibold shadow-soft hover:opacity-90 transition disabled:opacity-50 cursor-pointer"
+          >
+            {{ isSaving() ? 'جاري الحفظ...' : 'حفظ' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- Modal تأكيد الحذف -->
+  @if (itemToDelete()) {
+    <div class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4" (click)="cancelDelete()">
+      <div
+        class="bg-[var(--color-card)] rounded-[var(--radius)] shadow-elegant p-6 w-full max-w-sm"
+        (click)="$event.stopPropagation()"
+      >
+        <h3 class="font-bold text-lg text-center mb-2 text-[var(--color-foreground)]">تأكيد الحذف</h3>
+        <p class="text-sm text-center text-[var(--color-muted-foreground)] mb-5">
+          متأكدة إنك عايزة تمسحي "{{ itemToDelete()?.name }}"؟
+        </p>
+        <div class="flex gap-3">
+          <button
+            (click)="cancelDelete()"
+            class="flex-1 bg-[var(--color-secondary)] text-[var(--color-secondary-foreground)] rounded-lg py-2.5 font-semibold hover:opacity-80 transition cursor-pointer"
+          >
+            إلغاء
+          </button>
+          <button
+            (click)="deleteConfirmed()"
+            class="flex-1 text-white rounded-lg py-2.5 font-semibold transition cursor-pointer"
+            style="background-color: oklch(0.55 0.2 25)"
+          >
+            حذف
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+</div>

@@ -1,0 +1,54 @@
+<div class="min-h-screen bg-[var(--color-background)]" dir="rtl">
+  <!-- Header -->
+  <header
+    class="bg-[var(--color-card)] border-b border-[var(--color-border)] px-6 py-4 flex items-center justify-between"
+  >
+    <h1 class="text-lg font-bold text-gradient-gold">لوحة تحكم الشيف أحمد</h1>
+    <button
+      (click)="logout()"
+      class="text-sm bg-[var(--color-secondary)] text-[var(--color-secondary-foreground)] px-4 py-2 rounded-lg hover:opacity-80 transition cursor-pointer"
+    >
+      تسجيل خروج
+    </button>
+  </header>
+
+  <!-- Tabs -->
+  <nav
+    class="bg-[var(--color-card)] border-b border-[var(--color-border)] px-6 flex gap-2 overflow-x-auto"
+  >
+    <a
+      routerLink="portfolio"
+      routerLinkActive="border-[var(--color-primary)] text-[var(--color-primary)]"
+      [routerLinkActiveOptions]="{ exact: false }"
+      class="px-4 py-3 text-sm font-medium border-b-2 border-transparent text-[var(--color-muted-foreground)] transition whitespace-nowrap cursor-pointer"
+    >
+      المعرض
+    </a>
+    <a
+      routerLink="cakes"
+      routerLinkActive="border-[var(--color-primary)] text-[var(--color-primary)]"
+      class="px-4 py-3 text-sm font-medium border-b-2 border-transparent text-[var(--color-muted-foreground)] transition whitespace-nowrap cursor-pointer"
+    >
+      التورتات
+    </a>
+    <a
+      routerLink="gateaux"
+      routerLinkActive="border-[var(--color-primary)] text-[var(--color-primary)]"
+      class="px-4 py-3 text-sm font-medium border-b-2 border-transparent text-[var(--color-muted-foreground)] transition whitespace-nowrap cursor-pointer"
+    >
+      الجاتوهات
+    </a>
+    <a
+      routerLink="pricing"
+      routerLinkActive="border-[var(--color-primary)] text-[var(--color-primary)]"
+      class="px-4 py-3 text-sm font-medium border-b-2 border-transparent text-[var(--color-muted-foreground)] transition whitespace-nowrap cursor-pointer"
+    >
+      الأسعار
+    </a>
+  </nav>
+
+  <!-- Content -->
+  <main class="p-6 max-w-6xl mx-auto">
+    <router-outlet></router-outlet>
+  </main>
+</div>
