@@ -1,0 +1,94 @@
+<div class="space-y-6">
+  <div>
+    <h2 class="text-xl font-bold text-[var(--color-foreground)] mb-1">معرض الأعمال</h2>
+    <p class="text-sm text-[var(--color-muted-foreground)]">
+      إدارة الصور اللي بتظهر في قسم "أعمالنا السابقة"
+    </p>
+  </div>
+
+  <!-- رفع صورة جديدة -->
+  <div
+    class="bg-[var(--color-card)] rounded-[var(--radius)] shadow-soft p-5 border border-[var(--color-border)]"
+  >
+    <h3 class="font-semibold mb-3 text-[var(--color-foreground)]">رفع صورة جديدة</h3>
+
+    <label
+      class="flex items-center justify-center gap-2 border-2 border-dashed border-[var(--color-border)] rounded-lg py-6 cursor-pointer hover:border-[var(--color-primary)] transition"
+      [class.opacity-50]="isUploading()"
+    >
+      <input
+        type="file"
+        accept="image/*"
+        class="hidden"
+        (change)="onFileSelected($event)"
+        [disabled]="isUploading()"
+      />
+      <span class="text-[var(--color-muted-foreground)]">
+        {{ isUploading() ? 'جاري الرفع...' : 'اضغطي هنا لاختيار صورة من جهازك' }}
+      </span>
+    </label>
+
+    @if (errorMessage()) {
+      <p class="text-sm mt-2 text-center" style="color: oklch(0.55 0.2 25)">{{ errorMessage() }}</p>
+    }
+  </div>
+
+  <!-- عرض الصور -->
+  @if (isLoading()) {
+    <p class="text-center text-[var(--color-muted-foreground)] py-8">جاري التحميل...</p>
+  } @else if (images().length === 0) {
+    <p class="text-center text-[var(--color-muted-foreground)] py-8">مفيش صور مضافة لسه</p>
+  } @else {
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+      @for (img of images(); track img.id) {
+        <div
+          class="group relative aspect-square rounded-xl overflow-hidden shadow-soft border border-[var(--color-border)]"
+        >
+          <img [src]="img.imageUrl" [alt]="'صورة ' + img.id" class="h-full w-full object-cover" />
+          <button
+            (click)="confirmDelete(img)"
+            class="absolute top-2 left-2 bg-red-600/90 text-white rounded-full w-8 h-8 flex items-center justify-center opacity-0 group-hover:opacity-100 transition cursor-pointer"
+            title="حذف"
+          >
+            ✕
+          </button>
+        </div>
+      }
+    </div>
+  }
+
+  <!-- Modal تأكيد الحذف -->
+  @if (imageToDelete()) {
+    <div
+      class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+      (click)="cancelDelete()"
+    >
+      <div
+        class="bg-[var(--color-card)] rounded-[var(--radius)] shadow-elegant p-6 w-full max-w-sm"
+        (click)="$event.stopPropagation()"
+      >
+        <h3 class="font-bold text-lg text-center mb-2 text-[var(--color-foreground)]">
+          تأكيد الحذف
+        </h3>
+        <p class="text-sm text-center text-[var(--color-muted-foreground)] mb-5">
+          تنبيه: سيؤدي حذف هذه الصورة إلى إزالتها نهائياً ولا يمكن استرجاعها. هل تريد المتابعة؟
+        </p>
+        <div class="flex gap-3">
+          <button
+            (click)="cancelDelete()"
+            class="flex-1 bg-[var(--color-secondary)] text-[var(--color-secondary-foreground)] rounded-lg py-2.5 font-semibold hover:opacity-80 transition"
+          >
+            إلغاء
+          </button>
+          <button
+            (click)="deleteConfirmed()"
+            class="flex-1 text-white rounded-lg py-2.5 font-semibold transition cursor-pointer"
+            style="background-color: oklch(0.55 0.2 25)"
+          >
+            حذف
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+</div>

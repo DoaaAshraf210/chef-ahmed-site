@@ -1,0 +1,77 @@
+<div class="min-h-screen bg-[var(--color-background)]" dir="rtl">
+  <!-- Header -->
+  <header
+    class="bg-[var(--color-card)] border-b border-[var(--color-border)] px-6 py-4 flex items-center justify-between"
+  >
+    <h1 class="text-lg font-bold text-gradient-gold">لوحة تحكم الشيف أحمد</h1>
+    <button
+      (click)="logout()"
+      class="text-sm bg-[var(--color-secondary)] text-[var(--color-secondary-foreground)] px-4 py-2 rounded-lg hover:opacity-80 transition cursor-pointer"
+    >
+      تسجيل خروج
+    </button>
+  </header>
+
+  <!-- Tabs -->
+  <nav
+    class="bg-[var(--color-card)] border-b border-[var(--color-border)] px-6 flex gap-2 overflow-x-auto"
+  >
+    <button
+      (click)="setTab('portfolio')"
+      class="px-4 py-3 text-sm font-medium border-b-2 transition whitespace-nowrap cursor-pointer"
+      [class]="
+        activeTab() === 'portfolio'
+          ? 'border-[var(--color-primary)] text-[var(--color-primary)]'
+          : 'border-transparent text-[var(--color-muted-foreground)]'
+      "
+    >
+      المعرض
+    </button>
+    <button
+      (click)="setTab('cakes')"
+      class="px-4 py-3 text-sm font-medium border-b-2 transition whitespace-nowrap cursor-pointer"
+      [class]="
+        activeTab() === 'cakes'
+          ? 'border-[var(--color-primary)] text-[var(--color-primary)]'
+          : 'border-transparent text-[var(--color-muted-foreground)]'
+      "
+    >
+      التورتات
+    </button>
+    <button
+      (click)="setTab('gateaux')"
+      class="px-4 py-3 text-sm font-medium border-b-2 transition whitespace-nowrap cursor-pointer"
+      [class]="
+        activeTab() === 'gateaux'
+          ? 'border-[var(--color-primary)] text-[var(--color-primary)]'
+          : 'border-transparent text-[var(--color-muted-foreground)]'
+      "
+    >
+      الجاتوهات
+    </button>
+    <button
+      (click)="setTab('pricing')"
+      class="px-4 py-3 text-sm font-medium border-b-2 transition whitespace-nowrap cursor-pointer"
+      [class]="
+        activeTab() === 'pricing'
+          ? 'border-[var(--color-primary)] text-[var(--color-primary)]'
+          : 'border-transparent text-[var(--color-muted-foreground)]'
+      "
+    >
+      الأسعار
+    </button>
+  </nav>
+
+  <!-- Content -->
+  <main class="p-6 max-w-6xl mx-auto">
+    @if (activeTab() === 'portfolio') {
+      <app-portfolio-tab></app-portfolio-tab>
+    } @else if (activeTab() === 'pricing') {
+      <app-pricing-tab></app-pricing-tab>
+    } @else if (activeTab() === 'gateaux') {
+      <app-gateaux-tab></app-gateaux-tab>
+    } @else if (activeTab() === 'cakes') {
+      <app-cakes-tab></app-cakes-tab>
+    }
+  </main>
+</div>
