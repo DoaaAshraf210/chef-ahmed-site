@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment.development';
-
+import { environment } from '../../../environments/environment';
 export interface SizePricing {
   id: number;
   sizeLabel: string;
@@ -18,7 +17,8 @@ export interface SpecialPricing {
 @Injectable({
   providedIn: 'root',
 })
-export class Pricing { private baseUrl = `${environment.apiUrl}/Pricing`;
+export class Pricing {
+  private baseUrl = `${environment.apiUrl}/Pricing`;
 
   constructor(private http: HttpClient) {}
 

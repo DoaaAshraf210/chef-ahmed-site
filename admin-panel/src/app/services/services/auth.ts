@@ -1,8 +1,8 @@
 import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { environment } from '../../environments/environment.development';
 import { Observable, tap } from 'rxjs';
+import { environment } from '../../../environments/environment';
 interface LoginResponse {
   token: string;
 }
@@ -33,7 +33,7 @@ export class Auth {
   logout(): void {
     localStorage.removeItem(this.tokenKey);
     this.isLoggedIn.set(false);
-    this.router.navigate(['/admin-login-x7k2']); 
+    this.router.navigate(['/admin-login-x7k2']);
   }
 
   getToken(): string | null {

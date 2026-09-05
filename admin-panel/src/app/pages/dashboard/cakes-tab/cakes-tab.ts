@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Cake, Cakes } from '../../../services/cakes';
-import { Cloudinary } from '../../../services/cloudinary';
+import { Cake, Cakes } from '../../../services/services/cakes';
+import { Cloudinary } from '../../../services/services/cloudinary';
 
 @Component({
   selector: 'app-cakes-tab',

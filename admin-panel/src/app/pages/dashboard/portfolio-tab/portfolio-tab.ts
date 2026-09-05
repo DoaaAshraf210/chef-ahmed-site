@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Portfolio, PortfolioImage } from '../../../services/services/portfolio';
-import { Cloudinary } from '../../../services/cloudinary';
+import { Cloudinary } from '../../../services/services/cloudinary';
 
 @Component({
   selector: 'app-portfolio-tab',
@@ -10,7 +10,7 @@ import { Cloudinary } from '../../../services/cloudinary';
   templateUrl: './portfolio-tab.html',
   styleUrl: './portfolio-tab.css',
 })
-export class PortfolioTab implements OnInit{
+export class PortfolioTab implements OnInit {
   images = signal<PortfolioImage[]>([]);
   isLoading = signal<boolean>(true);
   isUploading = signal<boolean>(false);

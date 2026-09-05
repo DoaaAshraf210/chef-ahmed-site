@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Auth } from '../../services/auth';
+import { Auth } from '../../services/services/auth';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 type TabKey = 'portfolio' | 'cakes' | 'gateaux' | 'pricing';
 

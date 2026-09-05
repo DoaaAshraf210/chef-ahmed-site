@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Pricing, SizePricing, SpecialPricing } from '../../../services/pricing';
+import { Pricing, SizePricing, SpecialPricing } from '../../../services/services/pricing';
 
 @Component({
   selector: 'app-pricing-tab',

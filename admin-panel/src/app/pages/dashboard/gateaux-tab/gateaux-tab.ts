@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Gateau, Gateaux } from '../../../services/gateaux';
-import { Cloudinary } from '../../../services/cloudinary';
+import { Gateau, Gateaux } from '../../../services/services/gateaux';
+import { Cloudinary } from '../../../services/services/cloudinary';
 
 @Component({
   selector: 'app-gateaux-tab',
